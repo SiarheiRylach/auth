@@ -1,18 +1,10 @@
-const express = require('express'),
-      passport = require('passport'),
-      session = require('express-session'),
-      RedisStore = require('connect-redis')(session);
+const app = require('./app');
+const port = process.env.PORT || 3000;
 
-const app = express();
+app.listen(port, function (err) {
+    if (err) {
+        throw err
+    }
 
-app.use(session({
-    store: new RedisStore({
-        url: config.redisStore.url
-    }),
-    secret: config.redisStore.secret,
-    resave: false,
-    saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
+    console.log(`server is listening on ${port}...`)
+});
